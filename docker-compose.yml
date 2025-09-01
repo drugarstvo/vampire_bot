@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  vampires-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vampires-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - vampires-network
+
+networks:
+  vampires-network:
+    driver: bridge
